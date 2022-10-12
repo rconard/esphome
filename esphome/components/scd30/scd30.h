@@ -18,6 +18,7 @@ class SCD30Component : public Component, public sensirion_common::SensirionI2CDe
   void set_ambient_pressure_compensation(float pressure) {
     ambient_pressure_compensation_ = (uint16_t)(pressure * 1000);
   }
+  void set_forced_recalibration_value(uint16_t value);
   void set_temperature_offset(float offset) { temperature_offset_ = offset; }
   void set_update_interval(uint16_t interval) { update_interval_ = interval; }
 
@@ -41,6 +42,7 @@ class SCD30Component : public Component, public sensirion_common::SensirionI2CDe
   float temperature_offset_{0.0};
   uint16_t update_interval_{0xFFFF};
 
+  bool initialized_{false};
   sensor::Sensor *co2_sensor_{nullptr};
   sensor::Sensor *humidity_sensor_{nullptr};
   sensor::Sensor *temperature_sensor_{nullptr};
