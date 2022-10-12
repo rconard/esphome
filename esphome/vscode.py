@@ -12,7 +12,9 @@ from typing import Optional
 
 def _get_invalid_range(res, invalid):
     # type: (Config, cv.Invalid) -> Optional[DocumentRange]
-    return res.get_deepest_document_range_for_path(invalid.path)
+    return res.get_deepest_document_range_for_path(
+        invalid.path, invalid.error_message == "extra keys not allowed"
+    )
 
 
 def _dump_range(range):
@@ -67,7 +69,7 @@ def read_config(args):
         CORE.ace = args.ace
         f = data["file"]
         if CORE.ace:
-            CORE.config_path = os.path.join(args.configuration[0], f)
+            CORE.config_path = os.path.join(args.configuration, f)
         else:
             CORE.config_path = data["file"]
         vs = VSCodeResult()
