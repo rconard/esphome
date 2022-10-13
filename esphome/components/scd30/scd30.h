@@ -42,7 +42,6 @@ class SCD30Component : public Component, public sensirion_common::SensirionI2CDe
   float temperature_offset_{0.0};
   uint16_t update_interval_{0xFFFF};
 
-  bool initialized_{false};
   sensor::Sensor *co2_sensor_{nullptr};
   sensor::Sensor *humidity_sensor_{nullptr};
   sensor::Sensor *temperature_sensor_{nullptr};
